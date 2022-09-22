@@ -1,16 +1,38 @@
 import React, { Component } from "react";
 import "./index.css";
 const classNames = require("classnames");
-import { SketchPicker } from "react-color";
+//import { SketchPicker } from "react-color";
 
 export default class ColorPicker extends Component {
+  // constructor() {
+  //   super();
+  //   this.state = {
+  //     selectedColor: "",
+  //   };
+  // }
+
+  state = {
+    selectedColor: [],
+  };
+
+  AddColor = (e) => {
+    // alert("warna color");
+    this.setState({ selectedColor: e });
+  };
+
   render() {
-    let selectedColor;
+    const { selectedColor } = this.state;
+    // console.log(this.props);
+
     return (
       <div>
         <div className="layout-row justify-content-center">
           <div className="card mt-75">
-            <div className="canvas" data-testid="selectedColor">
+            <div
+              className="canvas"
+              data-testid="selectedColor"
+              style={{ backgroundColor: selectedColor }}
+            >
               <p className="text-center mx-auto px-5">{selectedColor}</p>
             </div>
             <div className="card-actions">
@@ -29,6 +51,8 @@ export default class ColorPicker extends Component {
                         selected: selectedColor === color,
                       })}
                       key={color}
+                      style={{ backgroundColor: color }}
+                      onClick={() => this.AddColor(color)}
                     ></div>
                   );
                 })}
